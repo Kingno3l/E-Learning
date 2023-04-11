@@ -126,7 +126,7 @@ $(`${SELECTOR_NAVBAR} ${SELECTOR_DROPDOWN_TOGGLE}`).on('click', event => {
     return
   }
 
-  setTimeout(function () {
+  eout(function () {
     Dropdown._jQueryInterface.call($(this), 'fixPosition')
   }, 1)
 })

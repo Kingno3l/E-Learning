@@ -1,5 +1,4 @@
 
-
 <?php
 // Database credentials
 $host = "localhost";
@@ -20,5 +19,5 @@ if ($con->errorCode() != null) {
 }
 
 // Close the database connection when you're done
-$con = null;
+//$con = null;
 ?>

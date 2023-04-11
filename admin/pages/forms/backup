@@ -1,0 +1,111 @@
+
+<?php
+
+$message = '';
+$error = '';
+
+
+
+// Execute SQL queries here
+if (isset($_POST['add_cat'])) {
+
+    if (empty($_POST['cat_name'])) {
+        $error .= 'Category name required';
+    }
+
+
+    $cat_name = $_POST['cat_name'];
+
+    $add_cat = $con->prepare("INSERT INTO cat (cat_name) VALUES (:cat_name)");
+    $add_cat->bindParam(':cat_name', $cat_name);
+    if ($add_cat->execute()) {
+        echo "Category added successfully!";
+    } else {
+        $errorInfo = $add_cat->errorInfo();
+        die("Failed to add category: " . $errorInfo[2]);
+    }
+}
+
+
+// Close the database connection when you're done
+$con = null;
+?>
+
+
+
+
+<?php
+
+include "../includes/header.php"
+?>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <?php
+
+        include "../includes/navbar.php"
+        ?>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <?php
+
+        include "../includes/main-sidebar.php"
+        ?>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <?php
+
+            include "../includes/content-header.php"
+            ?>
+            <!-- Main content -->
+
+            <?php
+
+            if (isset($_GET['msg'])) {
+                if ($_GET['msg'] == 'add') {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">New Category Added<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                }
+            }
+
+            ?>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div>
+                            <p>
+                                <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Add Category
+                                </button>
+                            </p>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body">
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form method="post" action="" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <input type="text" name="cat_name" class="form-control" id="categoryName" placeholder="Enter Category Name">
+                                            </div>
+                                            <button name="add_cat" class="btn btn-primary">Submit</button>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <?php
+
+        include "../includes/footer.php"
+        ?>
