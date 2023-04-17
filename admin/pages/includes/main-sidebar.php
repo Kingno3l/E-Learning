@@ -56,13 +56,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="index.php?cat" class="nav-link">
+                            <a href="category.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/mailbox/compose.html" class="nav-link">
+                            <a href="sub-category.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Sub Categories</p>
                             </a>

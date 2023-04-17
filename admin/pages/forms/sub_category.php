@@ -1,6 +1,6 @@
 <?php
 include "../includes/header.php";
-include "../code/add-category.php"
+include "../code/add-sub-category.php"
 ?>
 
 
@@ -28,7 +28,7 @@ include "../code/add-category.php"
                 <?php } ?>
 
                 <div class="card card-body">
-                    <?php if (isset($_GET['edit_cat'])) {
+                    <?php if (isset($_GET['edit_sub_cat'])) {
                         echo edit_cat();
                     } //else {
                     ?>
@@ -38,12 +38,18 @@ include "../code/add-category.php"
                         </button>
                     </p>
                     <div class="collapse" id="collapseExample">
-                        <form method="POST" action="../code/add-category.php" enctype="multipart/form-data">
+                        <form method="POST" action="../code/add-sub-category.php" enctype="multipart/form-data">
                             <div class="card-body">
                                 <div class="form-group">
-                                    <input type="text" name="cat_name" class="form-control" id="categoryName" placeholder="Enter Category Name" required>
+                                    <select class="form-control select2" name="cat_id" style="width: 100%;">
+                                        <option value="">Select Category</option>
+                                        <?php echo select_cat() ?>
+                                    </select>
                                 </div>
-                                <button name="add_cat" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <input type="text" name="sub_cat_name" class="form-control" id="sub-categoryName" placeholder="Enter Category Name" required>
+                                </div>
+                                <button name="add_sub_cat" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>
@@ -54,6 +60,7 @@ include "../code/add-category.php"
                 <thead>
                     <tr>
                         <th>SR Number</th>
+                        <th>Sub Category Name</th>
                         <th>Category Name</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -63,17 +70,23 @@ include "../code/add-category.php"
                     <tr>
                         <?php
                         include "../includes/db.php";
-                        $get_cat = $con->prepare("select * from cat");
+                        $get_cat = $con->prepare("select * from sub_cat");
                         $get_cat->setFetchMode(PDO::FETCH_ASSOC);
                         $get_cat->execute();
                         $i = 1;
                         while ($row = $get_cat->fetch()) :
+                            $id = $row['cat_id'];
+                            $get_c = $con->prepare("select * from cat where cat_id = '$id'");
+                            $get_c->setFetchMode(PDO::FETCH_ASSOC);
+                            $get_c->execute();
+                            $row_cat = $get_c->fetch();
                             echo "<tr>
-                <td>" . $i++ . "</td>
-                <td>" . $row['cat_name'] . "</td>
+                <td>" . $i++ . "</td>     
+                 <td>" . $row['sub_cat_name'] . "</td>
+                <td>" . $row_cat['cat_name'] . "</td>
                 <td><a href='edit.php?id=" . $row['cat_id'] . "' class='btn btn-warning'>
   <i class='fas fa-edit' ></i> Edit</a></td>
-                <td><a href='../code/delete.php?id=" . $row['cat_id'] . "' class='btn btn-danger'>
+                <td><a href='../code/delete-sub-cat.php?id=" . $row['cat_id'] . "' class='btn btn-danger'>
   <i class='fas fa-trash'></i> Delete</a></td>
               </tr>";
                         endwhile;

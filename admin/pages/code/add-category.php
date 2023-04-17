@@ -38,27 +38,27 @@ if (isset($_POST['add_cat'])) {
 }
 
 // Show Category Function
-function show_cat()
-{
-    include "../includes/db.php";
-    $get_cat = $con->prepare("select * from cat");
-    $get_cat->setFetchMode(PDO::FETCH_ASSOC);
-    $get_cat->execute();
-    $i = 1;
-    while ($row = $get_cat->fetch()) :
-        echo "<tr>
-                <td>" . $i++ . "</td>
-                <td>" . $row['cat_name'] . "</td>
-                <td><a href='edit.php?id=" . $row['cat_id'] . "' class='btn btn-warning'>
-  <i class='fas fa-edit' ></i> Edit</a></td>
-                <td><a href='delete.php?id=" . $row['cat_id'] . "' class='btn btn-danger'>
-  <i class='fas fa-trash'></i> Delete</a></td>
-              </tr>";
-    endwhile;
+// function show_cat()
+// {
+//     include "../includes/db.php";
+//     $get_cat = $con->prepare("select * from cat");
+//     $get_cat->setFetchMode(PDO::FETCH_ASSOC);
+//     $get_cat->execute();
+//     $i = 1;
+//     while ($row = $get_cat->fetch()) :
+//         echo "<tr>
+//                 <td>" . $i++ . "</td>
+//                 <td>" . $row['cat_name'] . "</td>
+//                 <td><a href='edit.php?id=" . $row['cat_id'] . "' class='btn btn-warning'>
+//   <i class='fas fa-edit' ></i> Edit</a></td>
+//                 <td><a href='delete.php?id=" . $row['cat_id'] . "' class='btn btn-danger'>
+//   <i class='fas fa-trash'></i> Delete</a></td>
+//               </tr>";
+//     endwhile;
 
     
-    $con = null;
-}
+//     $con = null;
+// }
 
 
 // Edit Category Function
