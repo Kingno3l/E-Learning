@@ -1,6 +1,4 @@
-<?php
-    include "db.php"
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,3 +15,25 @@
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
 </head>
 
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <?php
+
+        include "navbar.php"
+        ?>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <?php
+
+        include "main-sidebar.php"
+        ?>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <?php
+
+            include "content-header.php"
+            ?>
+            <!-- Main content -->
