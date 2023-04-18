@@ -15,7 +15,7 @@ if ($statement->rowCount() > 0) {
     $sub_cat_name = $result['sub_cat_name'];
 
     // Delete the subcategory from the database
-    $del = $con->prepare("DELETE FROM sub_cat WHERE sub_cat_id = :id");
+    $del = $con->prepare("DELETE FROM sub_cat WHERE cat_id = :id");
     $del->bindParam(':id', $id);
 
     if ($del->execute()) {

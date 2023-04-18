@@ -62,7 +62,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="sub-category.php" class="nav-link">
+                            <a href="sub_category.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>View Sub Categories</p>
                             </a>

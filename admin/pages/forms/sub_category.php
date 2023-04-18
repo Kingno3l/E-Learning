@@ -34,7 +34,7 @@ include "../code/add-sub-category.php"
                     ?>
                     <p>
                         <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            Add Category
+                            Add Sub Category
                         </button>
                     </p>
                     <div class="collapse" id="collapseExample">
@@ -42,7 +42,7 @@ include "../code/add-sub-category.php"
                             <div class="card-body">
                                 <div class="form-group">
                                     <select class="form-control select2" name="cat_id" style="width: 100%;">
-                                        <option value="">Select Category</option>
+                                        <option>Select Category</option>
                                         <?php echo select_cat() ?>
                                     </select>
                                 </div>
@@ -84,7 +84,7 @@ include "../code/add-sub-category.php"
                 <td>" . $i++ . "</td>     
                  <td>" . $row['sub_cat_name'] . "</td>
                 <td>" . $row_cat['cat_name'] . "</td>
-                <td><a href='edit.php?id=" . $row['cat_id'] . "' class='btn btn-warning'>
+                <td><a href='edit_sub_cat.php?id=" . $row['sub_cat_id'] . "' class='btn btn-warning'>
   <i class='fas fa-edit' ></i> Edit</a></td>
                 <td><a href='../code/delete-sub-cat.php?id=" . $row['cat_id'] . "' class='btn btn-danger'>
   <i class='fas fa-trash'></i> Delete</a></td>

@@ -1,46 +1,47 @@
-
 <?php
 include "../includes/db.php";
 
-$id = $_GET['id'];
+$id = $_POST['sub_cat_id'];
+//echo $id;
 
-if (isset($_POST['edit_cat'])) {
-    $formdata['cat_name'] = trim($_POST['cat_name']);
+if (isset($_POST['edit_sub_cat'])) {
+    $formdata['sub_cat_name'] = trim($_POST['sub_cat_name']);
+    $formdata['cat_id'] = intval($_POST['cat_id']);
 
-    if (empty($formdata['cat_name'])) {
-        header('location:../forms/category.php?error=A Valid Category Name is required');
+    if (empty($formdata['sub_cat_name'])) {
+        header('location:../forms/sub_category.php?id=' . $id . '&error=A Valid Sub Category Name is required');
         exit;
     }
 
-    $id = intval($_POST['cat_id']);
-
-    $query = "SELECT * FROM cat WHERE cat_name = :cat_name AND cat_id != :id";
+    $query = "SELECT * FROM sub_cat WHERE sub_cat_name = :sub_cat_name AND cat_id = :cat_id AND sub_cat_id != :id";
 
     $statement = $con->prepare($query);
 
-    $statement->bindParam(':cat_name', $formdata['cat_name']);
+    $statement->bindParam(':sub_cat_name', $formdata['sub_cat_name']);
+    $statement->bindParam(':cat_id', $formdata['cat_id']);
     $statement->bindParam(':id', $id);
 
     $statement->execute();
 
     if ($statement->rowCount() > 0) {
-        header('location:../forms/category.php?error=Category "<strong>' . $_POST['cat_name'] . '</strong>" Already Exists');
+        header('location:../forms/sub_category.php?id=' . $id . '&error=Sub Category "<strong>' . $_POST['sub_cat_name'] . '</strong>" Already Exists');
         exit;
     } else {
         $data = array(
-            ':cat_name' => $formdata['cat_name'],
+            ':sub_cat_name' => $formdata['sub_cat_name'],
+            ':cat_id' => $formdata['cat_id'],
             ':id' => $id
         );
 
-        $query = "UPDATE cat SET cat_name = :cat_name WHERE cat_id = :id";
+        $query = "UPDATE sub_cat SET sub_cat_name = :sub_cat_name, cat_id = :cat_id WHERE sub_cat_id = :id";
 
         $statement = $con->prepare($query);
 
         if ($statement->execute($data)) {
-            header('location:../forms/category.php?success=Category "<strong>' . $_POST['cat_name'] . '</strong>" Updated Successfully');
+            header('location:../forms/sub_category.php?id=' . $id . '&success=Sub Category "<strong>' . $_POST['sub_cat_name'] . '</strong>" Updated Successfully');
             exit;
         } else {
-            header('location:../forms/category.php?error=Failed to update category. Please try again.');
+            header('location:../forms/sub_category.php?id=' . $id . '&error=Failed to update sub category. Please try again.');
             exit;
         }
     }
